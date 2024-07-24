@@ -6,7 +6,7 @@ const NewCollections = () => {
   const [new_collection, setNew_collection] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:3000/newcollections").then((res)=>res.json()).then((data)=>setNew_collection(data))
+    fetch("https://ecommerce-mern-server-tau.vercel.app/newcollections").then((res)=>res.json()).then((data)=>setNew_collection(data))
   },[])
   
   return (
