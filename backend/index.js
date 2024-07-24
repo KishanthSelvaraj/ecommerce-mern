@@ -25,6 +25,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight
 
 
 // const mySecret = process.env.URI;
