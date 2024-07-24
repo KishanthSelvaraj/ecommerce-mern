@@ -6,7 +6,7 @@ const Popular = () => {
   const [popular_products, setPopular_products] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:3000/popularproducts").then((res)=>res.json()).then((data)=>setPopular_products(data))
+    fetch("https://ecommerce-mern-server-tau.vercel.app/popularproducts").then((res)=>res.json()).then((data)=>setPopular_products(data))
   },[])
   return (
     <section className="bg-primary">
