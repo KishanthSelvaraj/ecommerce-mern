@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-// import all_products from "../assets/all_products";
 
 export const ShopContext = createContext(null);
+
 const getDefaultCart = () => {
   let cart = {};
   for (let index = 0; index < 300 + 1; index++) {
@@ -9,38 +9,44 @@ const getDefaultCart = () => {
   }
   return cart;
 };
+
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
- const [all_products, setAll_products] = useState([]);
+  const [all_products, setAll_products] = useState([]);
 
-useEffect(()=>{
-  fetch("https://ecommerce-mern-server-tau.vercel.app/allproducts").then((res)=>res.json()).then((data)=>setAll_products(data))
-  if (localStorage.getItem("auth-token")) {
-    fetch("https://ecommerce-mern-server-tau.vercel.app/getcart", {
-      method: "POST",
-      headers: {
-        Accept: "application/form-data",
-        "auth-token": `${localStorage.getItem("auth-token")}`,
-        "Content-Type": "application/json",
-      },
-      body: "",
-    }).then((res)=>res.json()).then((data)=>setCartItems(data))
-  }
-},[])
+  useEffect(() => {
+    fetch("https://ecommerce-mern-server-tau.vercel.app/allproducts")
+      .then((res) => res.json())
+      .then((data) => setAll_products(data));
+
+    if (localStorage.getItem("auth-token")) {
+      fetch("https://ecommerce-mern-server-tau.vercel.app/getcart", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setCartItems(data));
+    }
+  }, []);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    // console.log(cartItems);
     if (localStorage.getItem("auth-token")) {
       fetch("https://ecommerce-mern-server-tau.vercel.app/addtocart", {
         method: "POST",
         headers: {
-          Accept: "application/form-data",
+          "Accept": "application/json",
           "auth-token": `${localStorage.getItem("auth-token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({"itemId": itemId }),
-      }).then((res)=>res.json()).then((data)=>console.log(data))
+        body: JSON.stringify({ "itemId": itemId }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     }
   };
 
@@ -50,12 +56,14 @@ useEffect(()=>{
       fetch("https://ecommerce-mern-server-tau.vercel.app/removefromcart", {
         method: "POST",
         headers: {
-          Accept: "application/form-data",
+          "Accept": "application/json",
           "auth-token": `${localStorage.getItem("auth-token")}`,
           "Content-Type": "application/json",
         },
-        body:JSON.stringify({"itemId": itemId }),
-      }).then((res)=>res.json()).then((data)=>console.log(data))
+        body: JSON.stringify({ "itemId": itemId }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     }
   };
 
@@ -81,6 +89,7 @@ useEffect(()=>{
     }
     return totalItem;
   };
+
   const contextValue = {
     getTotalCartItem,
     getTotalCartAmount,
