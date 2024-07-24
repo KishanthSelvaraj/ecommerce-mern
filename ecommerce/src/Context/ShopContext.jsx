@@ -14,9 +14,9 @@ const ShopContextProvider = (props) => {
  const [all_products, setAll_products] = useState([]);
 
 useEffect(()=>{
-  fetch("http://localhost:3000/allproducts").then((res)=>res.json()).then((data)=>setAll_products(data))
+  fetch("https://ecommerce-mern-server-tau.vercel.app/allproducts").then((res)=>res.json()).then((data)=>setAll_products(data))
   if (localStorage.getItem("auth-token")) {
-    fetch("http://localhost:3000/getcart", {
+    fetch("https://ecommerce-mern-server-tau.vercel.app/getcart", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -32,7 +32,7 @@ useEffect(()=>{
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     // console.log(cartItems);
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/addtocart", {
+      fetch("https://ecommerce-mern-server-tau.vercel.app/addtocart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -47,7 +47,7 @@ useEffect(()=>{
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/removefromcart", {
+      fetch("https://ecommerce-mern-server-tau.vercel.app/removefromcart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
