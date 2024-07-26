@@ -28,8 +28,8 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // Enable preflight
 
 
-// const mySecret = process.env.URI;
-mongoose.connect("mongodb+srv://ecommerceMern:kishanth21@cluster0.rdnh7tn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+const mySecret = process.env.URI;
+mongoose.connect(mySecret);
 
 app.get("/", (req, res) => {
   res.send("Express App is running");
