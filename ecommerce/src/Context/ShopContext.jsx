@@ -15,12 +15,12 @@ const ShopContextProvider = (props) => {
   const [all_products, setAll_products] = useState([]);
 
   useEffect(() => {
-    fetch("https://ecommerce-mern-server-tau.vercel.app/allproducts")
+    fetch("https://ecommerce-mern-w5oy.onrender.com/allproducts")
       .then((res) => res.json())
       .then((data) => setAll_products(data));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("https://ecommerce-mern-server-tau.vercel.app/getcart", {
+      fetch("https://ecommerce-mern-w5oy.onrender.com/getcart", {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -36,7 +36,7 @@ const ShopContextProvider = (props) => {
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("https://ecommerce-mern-server-tau.vercel.app/addtocart", {
+      fetch("https://ecommerce-mern-w5oy.onrender.com/addtocart", {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -53,7 +53,7 @@ const ShopContextProvider = (props) => {
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("https://ecommerce-mern-server-tau.vercel.app/removefromcart", {
+      fetch("https://ecommerce-mern-w5oy.onrender.com/removefromcart", {
         method: "POST",
         headers: {
           "Accept": "application/json",
