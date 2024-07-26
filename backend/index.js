@@ -11,7 +11,7 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
-const allowedOrigins = ['https://ecommerce-mern-beta.vercel.app', 'https://another-allowed-origin.com'];
+const allowedOrigins = ['https://ecommerce-mern-beta.vercel.app', 'https://another-allowed-origin.com','http://localhost:5173'];
 
 const corsOptions = {
   origin: function (origin, callback) {
